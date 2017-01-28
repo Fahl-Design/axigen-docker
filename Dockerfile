@@ -1,7 +1,11 @@
-FROM debian
+FROM debian:8
 
 # install required commands
-RUN apt-get update && apt-get install -y  wget expect
+RUN apt-get update && apt-get install -y  wget expect spamassassin
+
+# Enable SpamAssassin to be started from sysvinit
+RUN sed "s/ENABLED=0/ENABLED=1/" /etc/default/spamassassin > /tmp/spamassassin ;\
+    mv /tmp/spamassassin /etc/default/spamassassin
 
 # copy files for axigen installer
 COPY axigen/ /axigen
@@ -11,12 +15,12 @@ COPY bin/	/usr/local/bin
 # 	admin password 		= admin
 # 	postmaster password = postmaster
 RUN cd /axigen ;\
-wget https://www.axigen.com/usr/files/axigen-10.0.0/axigen-10.0.0.amd64.deb.run ;\
-export TERM=xterm ;\
-chmod +x /axigen/* /usr/local/bin/axigen.sh /usr/local/bin/entrypoint.sh;\
-/axigen/install-axigen.exp ;\
-cd / ;\
-rm -r /axigen
+    wget https://www.axigen.com/usr/files/axigen-10.0.0/axigen-10.0.0.amd64.deb.run ;\
+    export TERM=xterm ;\
+    chmod +x /axigen/* /usr/local/bin/axigen.sh /usr/local/bin/entrypoint.sh;\
+    /axigen/install-axigen.exp ;\
+    cd / ;\
+    rm -r /axigen
 
 #expose required ports for SMTP, POP3, IMAP, POP3S, IMAPS, WebAdmin, Webmail and CLI
 EXPOSE 25 110 143 993 995 9000 80 7000

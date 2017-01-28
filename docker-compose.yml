@@ -5,16 +5,20 @@ services:
     image: "wbvreeuwijk/axigen:latest"
     build: .
     ports:
-      -   "25:25"  # SMTP
-      -  "110:110" # POP3
-      -  "143:143" # IMAP
-      -  "443:443" # HTTPS WebMail
-      -  "465:465" # SMTPS
-      -  "993:993" # POP3S
-      -  "995:995" # IMAPS
+      -   "25:25"   # SMTP
+      -  "110:110"  # POP3
+      -  "143:143"  # IMAP
+      -  "443:443"  # HTTPS WebMail
+      -  "465:465"  # SMTPS
+      -  "993:993"  # POP3S
+      -  "995:995"  # IMAPS
       - "7000:7000" # Axigen CLI
       - "8888:8888" # HTTP WebMail
       - "9000:9000" # HTTP Mail Admin
     volumes:
       - <replace mountpoint>:/var/axigen
 
+networks:
+  default:
+    external:
+      name: host # Connect to Host network to determine connecting IP

@@ -5,6 +5,7 @@ term_handler() {
 
     # Stop axigen
     /etc/init.d/axigen stop
+    /etc/init.d/spamassassin stop
 
     exit 143; # 128 + 15 -- SIGTERM
 }
@@ -13,6 +14,7 @@ trap 'kill "$tail_pid"; term_handler' INT QUIT KILL TERM
 
 # start the service
 echo "Starting axigen service"
+/etc/init.d/spamassassin start
 /etc/init.d/axigen start
 
 LOGS_FILES="/var/log/dmesg"
