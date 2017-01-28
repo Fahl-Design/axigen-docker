@@ -46,5 +46,8 @@ _link /var/axigen/serverData /var/opt/axigen/serverData
 _link /var/axigen/templates /var/opt/axigen/templates
 _link /var/axigen/webadmin /var/opt/axigen/webadmin
 _link /var/axigen/webmail /var/opt/axigen/webmail
+_link /var/axigen/certs /var/opt/axigen/certs
+_link /var/axigen/spamassassin /var/opt/axigen/spamassassin
+_link /var/axigen/axigen_lk.bin /var/opt/axigen/axigen_lk.bin
 
 exec "$@"
