@@ -15,7 +15,7 @@ COPY bin/	/usr/local/bin
 # 	admin password 		= admin
 # 	postmaster password = postmaster
 RUN cd /axigen ;\
-    wget https://www.axigen.com/usr/files/axigen-10.1.3/axigen-10.1.3.amd64.deb.run ;\
+    wget https://www.axigen.com/usr/files/axigen-10.1.4/axigen-10.1.4.amd64.deb.run ;\
     export TERM=xterm ;\
     chmod +x /axigen/* /usr/local/bin/axigen.sh /usr/local/bin/entrypoint.sh;\
     /axigen/install-axigen.exp ;\
